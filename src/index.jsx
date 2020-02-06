@@ -2,7 +2,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { createStore, combineReducers } from 'redux';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
+import { logger } from 'redux-logger';
+import reduxPromise from 'redux-promise';
 import { BrowserRouter as Router, Route, Redirect, Switch }
   from 'react-router-dom';
 import { createHistory as history } from 'history';
@@ -24,7 +26,7 @@ const reducers = combineReducers({
 });
 
 // Middleware
-
+const middlewares = applyMiddleware(reduxPromise, logger);
 const store = createStore(reducers, initialState, middlewares);
 
 
@@ -35,7 +37,7 @@ ReactDOM.render(
     <Router history={history}>
       <Switch>
        <Route path="/:channel" component={App} />
-       <Redirect from="/" to="/general" />
+       <Redirect from="/" to="/" />
      </Switch>
     </Router>
   </Provider>,
