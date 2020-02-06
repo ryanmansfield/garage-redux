@@ -11,14 +11,27 @@ import { createHistory as history } from 'history';
 import App from './components/app';
 import '../assets/stylesheets/application.scss';
 
+const garageName = promopt("What is your garage name?");
+const initialState = {
+  garage: garageName,
+  cars: [],
+};
+
 // State and reducers
 const reducers = combineReducers({
-  changeMe: (state = null, action) => state
+  garage: (state = null, action) => state,
+  cars: carsReducer
 });
+
+// Middleware
+
+const store = createStore(reducers, initialState, middlewares);
+
+
 
 // render an instance of the component in the DOM
 ReactDOM.render(
-  <Provider store={createStore(reducers)}>
+  <Provider store={store}>
     <Router history={history}>
       <Switch>
        <Route path="/:channel" component={App} />
