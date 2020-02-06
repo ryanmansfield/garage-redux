@@ -13,7 +13,7 @@ import { createHistory as history } from 'history';
 import App from './components/app';
 import '../assets/stylesheets/application.scss';
 
-const garageName = promopt("What is your garage name?");
+const garageName = prompt("What is your garage name?");
 const initialState = {
   garage: garageName,
   cars: [],
