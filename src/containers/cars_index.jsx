@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-// import { bindActionCreators } from 'redux';
-// import { selectChannel, fetchMessages } from '../actions/index';
+import { bindActionCreators } from 'redux';
+import { fetchCars } from '../actions';
 
 class CarsIndex extends Component {
+  componentWillMount() {
+    this.fetchCars(this.props.garage);
+  }
+
   render() {
     return (
        <div className="list-container">
@@ -29,13 +33,14 @@ class CarsIndex extends Component {
 function mapStateToProps (state) {
   return {
     cars: state.cars,
+    garage: state.garage,
   };
 }
 
-// function mapDispatchToProps(dispatch) {
-//   return bindActionCreators({  }, dispatch)
-// }
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ fetchCars }, dispatch)
+}
 
-export default connect(mapStateToProps)(CarsIndex);
+export default connect(mapStateToProps, mapDispatchToProps )(CarsIndex);
 
 
